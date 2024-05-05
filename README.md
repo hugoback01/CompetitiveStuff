@@ -1,2 +1,3 @@
 # CompetitiveStuff
-CompetitiveStuff
+
+Trying to learn programming!
