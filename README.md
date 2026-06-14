@@ -4,7 +4,7 @@ This repository contains my solutions, notes, and occasional writeups from compe
 
 ## Profiles
 
-* Codeforces: [hugoback01](https://codeforces.com/profile/hugoback01))
+* Codeforces: [hugoback01](https://codeforces.com/profile/hugoback01)
 * AtCoder: [hugoback01](https://atcoder.jp/)
 
 ## Platforms
