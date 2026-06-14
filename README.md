@@ -4,10 +4,25 @@ This repository contains my solutions, notes, and occasional writeups from compe
 
 ## Profiles
 
-* Codeforces: [Your Codeforces Profile](YOUR_CODEFORCES_LINK)
-* AtCoder: [Your AtCoder Profile](YOUR_ATCODER_LINK)
+* Codeforces: [Your Codeforces Profile]([YOUR_CODEFORCES_LINK](https://codeforces.com/profile/hugoback01))
+* AtCoder: [Your AtCoder Profile]([YOUR_ATCODER_LINK](https://atcoder.jp/))
 
 ## Platforms
+
+
+### Codeforces
+
+Codeforces is my main platform for competitive programming contests. It features regular rated contests (Div.1–Div.4) and a strong problem archive.
+
+What I use Codeforces for:
+- Timed contests under pressure
+- Learning new algorithms and tricks from editorials
+- Practicing implementation speed and accuracy
+- Upsolving past contest problems
+
+The difficulty varies a lot, which makes it useful for continuous improvement from beginner level up to advanced algorithmic problems.
+
+---
 
 ### CSES
 
@@ -129,4 +144,4 @@ kattis/
 notes/
 ```
 
-I primarily write solutions in Python and occasionally include short editorials for interesting problems.
+I primarily write solutions in Python and present solution interesting problems at Chalmers Coding CLub.
