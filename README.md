@@ -1,6 +1,6 @@
 # Competitive Programming
 
-This repository contains my solutions, notes, and occasional writeups from competitive programming platforms and contests.
+This repository contains a very little portion of my solutions from competitive programming platforms and contests. I have solved over 1100 problems across many plattforms, thus gained an increadibly problems solving mindset.
 
 ## Profiles
 
@@ -47,101 +47,104 @@ AtCoder contests are known for their clean problem statements and high-quality t
 
 ---
 
-# Latest Solve: ARC 222 C
+# Latest Solve: ARC 222 C — 2 Directions vs 4 Directions
 
-Problem:
-https://atcoder.jp/contests/arc222/tasks/arc222_c
+🔗 Problem: https://atcoder.jp/contests/arc222/tasks/arc222_c
 
-### Short Statement
+---
 
-Given an (n \times n) grid, compute for every cell the minimum cost of constructing a valid diagonal path from the top row to the bottom row while avoiding that specific cell.
+## Idea Summary
 
-### Key Observation
+We reduce the problem into a **grid DP with constrained movement directions**.
 
-For each cell, only its left and right neighbors contribute to the local cost:
+Instead of simulating the game, we observe that:
+- Horizontal movement is the key restriction
+- Vertical propagation is handled by DP layers
+- The problem becomes combining two directional DP passes
 
-```python
-cost[i][j] =
-    grid[i][j-1] +
-    grid[i][j+1]
-```
+We define a modified cost:
+- each cell depends only on its horizontal neighbors
 
-This allows us to transform the original problem into a shortest-path style dynamic programming problem.
+Then compute:
+- DP from top → bottom
+- DP from bottom → top
+- combine results for each cell
 
-### Step 1: DP From Top
+---
 
-Let
-
-```python
-up_dp[i][j]
-```
-
-be the minimum cost of a valid diagonal path from the first row to cell `(i,j)`.
-
-Transitions:
+## Full Solution Code
 
 ```python
-up_dp[i][j] =
-    min(
-        up_dp[i-1][j-1],
-        up_dp[i-1][j+1]
-    )
-    + cost[i][j]
-```
+import sys
 
-### Step 2: DP From Bottom
+input = lambda: sys.stdin.readline().strip()
+inp = lambda: list(map(int, input().split()))
 
-Similarly,
+INF = 10**18
 
-```python
-down_dp[i][j]
-```
 
-stores the minimum cost from cell `(i,j)` to the last row.
+def solve():
+    (n,) = inp()
+    A = [inp() for _ in range(n)]
 
-Transitions are identical but processed in reverse order.
+    # compute local horizontal cost contribution
+    cost = [[0] * n for _ in range(n)]
 
-### Step 3: Remove One Cell
+    for i in range(n):
+        for j in range(n):
+            if j - 1 >= 0:
+                cost[i][j] += A[i][j - 1]
+            if j + 1 < n:
+                cost[i][j] += A[i][j + 1]
 
-Suppose we want the answer for cell `(i,j)`.
+    # DP from top
+    up_dp = [[INF] * n for _ in range(n)]
+    for j in range(n):
+        up_dp[0][j] = cost[0][j]
 
-A valid path cannot pass through this cell, so it must go through either:
+    for i in range(1, n):
+        for j in range(n):
+            best = INF
+            if j - 1 >= 0:
+                best = min(best, up_dp[i - 1][j - 1])
+            if j + 1 < n:
+                best = min(best, up_dp[i - 1][j + 1])
+            up_dp[i][j] = best + cost[i][j]
 
-```python
-(i, j-1)
-```
+    # DP from bottom
+    down_dp = [[INF] * n for _ in range(n)]
+    for j in range(n):
+        down_dp[n - 1][j] = cost[n - 1][j]
 
-or
+    for i in range(n - 2, -1, -1):
+        for j in range(n):
+            best = INF
+            if j - 1 >= 0:
+                best = min(best, down_dp[i + 1][j - 1])
+            if j + 1 < n:
+                best = min(best, down_dp[i + 1][j + 1])
+            down_dp[i][j] = best + cost[i][j]
 
-```python
-(i, j+1)
-```
+    # combine both directions
+    ans = [[INF] * n for _ in range(n)]
 
-We combine the best path from above and below:
+    for i in range(n):
+        for j in range(n):
+            if j - 1 >= 0:
+                ans[i][j] = min(
+                    ans[i][j],
+                    up_dp[i][j - 1] + down_dp[i][j - 1] - cost[i][j - 1],
+                )
+            if j + 1 < n:
+                ans[i][j] = min(
+                    ans[i][j],
+                    up_dp[i][j + 1] + down_dp[i][j + 1] - cost[i][j + 1],
+                )
 
-```python
-up_dp + down_dp - cost
-```
+    for row in ans:
+        print(*row)
 
-The subtraction avoids counting the middle cell twice.
 
-### Complexity
-
-```text
-Time:  O(n²)
-Space: O(n²)
-```
-
-The solution performs only a few DP passes over the grid.
-
-## Repository Structure
-
-```text
-atcoder/
-codeforces/
-cses/
-kattis/
-notes/
-```
-
-I primarily write solutions in Python and present solution interesting problems at Chalmers Coding CLub.
+t = int(input())
+for _ in range(t):
+    solve() ```
