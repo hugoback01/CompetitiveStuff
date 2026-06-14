@@ -4,8 +4,8 @@ This repository contains my solutions, notes, and occasional writeups from compe
 
 ## Profiles
 
-* Codeforces: [Your Codeforces Profile]([YOUR_CODEFORCES_LINK](https://codeforces.com/profile/hugoback01))
-* AtCoder: [Your AtCoder Profile]([YOUR_ATCODER_LINK](https://atcoder.jp/))
+* Codeforces: [hugoback01](https://codeforces.com/profile/hugoback01))
+* AtCoder: [hugoback01](https://atcoder.jp/)
 
 ## Platforms
 
